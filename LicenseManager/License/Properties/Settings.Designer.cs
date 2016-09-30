@@ -26,34 +26,11 @@ namespace License.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("workstation id=VisaLicenses.mssql.somee.com;packet size=4096;user id=visahelper_S" +
-            "QLLogin_1;pwd=l15cwln5jj;data source=VisaLicenses.mssql.somee.com;persist securi" +
-            "ty info=False;initial catalog=VisaLicenses")]
-        public string LicenseDBConnectionString {
-            get {
-                return ((string)(this["LicenseDBConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=VisaLicenses.mssql.somee.com;Initial Catalog=VisaLicenses;Persist Sec" +
-            "urity Info=True;User ID=visahelper_SQLLogin_1;Password=l15cwln5jj")]
-        public string VisaLicensesConnectionString {
-            get {
-                return ((string)(this["VisaLicensesConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=softstarserver.database.windows.net;Initial Catalog=LicenseDb;Persist" +
             " Security Info=True;User ID=enterpriseAdmin;Password=ZasXqw12")]
-        public string LicenseDbConnectionString1 {
+        public string LicenseDbConnectionString {
             get {
-                return ((string)(this["LicenseDbConnectionString1"]));
+                return ((string)(this["LicenseDbConnectionString"]));
             }
         }
     }

@@ -1,28 +1,33 @@
 ﻿using DevExpress.XtraEditors;
+using License.DB;
+using License.DB.LicenseDBDataSetTableAdapters;
 using NLog;
+using Resources;
 using System;
 using System.Linq;
 using System.Management;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ToolsPortable;
-using  License.DB;
-using  Resources;
 
-namespace  License.Logic
+namespace License.Logic
 {
     public partial class LicenseForm : Form
     {
         private static readonly Logger _logger =
             LogManager.GetCurrentClassLogger();
 
-        private readonly LicenseDbClassesDataContext _context =
-            new LicenseDbClassesDataContext();
+        private readonly LicenseTableAdapter _licenseTableAdapter =
+            new LicenseTableAdapter();
+
+        private readonly LicenseDBDataSet _licenseDbDataSet =
+            new LicenseDBDataSet();
 
         public LicenseForm()
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            _licenseTableAdapter.Fill(_licenseDbDataSet.License);
         }
 
         public bool IsWrong { get; set; }
@@ -57,7 +62,7 @@ namespace  License.Logic
 
             if (isMatched)
             {
-                DB.License inst = null;
+                LicenseDBDataSet.LicenseRow inst = null;
 
                 for (var j = 0;
                     j < 3;
@@ -65,7 +70,7 @@ namespace  License.Logic
                 {
                     try
                     {
-                        inst = _context.Licenses
+                        inst = _licenseDbDataSet.License.Rows.Cast<LicenseDBDataSet.LicenseRow>()
                             .FirstOrDefault(
                                 i => i.Guid == textEdit1.EditValue.ToString());
                         break;
@@ -82,7 +87,7 @@ namespace  License.Logic
                     if (string.IsNullOrWhiteSpace(inst.PcName))
                     {
                         inst.PcName = GetMotherBoardId();
-                        _context.SubmitChanges();
+                        _licenseTableAdapter.Update(inst);
                     }
                     else if (inst.PcName != GetMotherBoardId())
                     {
@@ -116,7 +121,7 @@ namespace  License.Logic
 
             var property = wmiClass.Properties.Cast<PropertyData>()
                 .FirstOrDefault(propData => propData.Name == "SerialNumber");
-            return $"{property?.Name,-25}{Convert.ToString(property?.Value)}";
+            return property?.Value.ToString();
         }
 
         private void applyButton_Click(object sender,

@@ -104,10 +104,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DB\LicenseDbClasses.designer.cs">
+    <Compile Include="DB\LicenseDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LicenseDbClasses.dbml</DependentUpon>
+      <DependentUpon>LicenseDBDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Logic\LicenseForm.cs">
       <SubType>Form</SubType>
@@ -124,10 +124,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="DB\LicenseDbClasses.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>LicenseDbClasses.designer.cs</LastGenOutput>
+    <None Include="DB\LicenseDBDataSet.xsc">
+      <DependentUpon>LicenseDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DB\LicenseDBDataSet.xsd">
       <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LicenseDBDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DB\LicenseDBDataSet.xss">
+      <DependentUpon>LicenseDBDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -136,9 +142,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DB\LicenseDbClasses.dbml.layout">
-      <DependentUpon>LicenseDbClasses.dbml</DependentUpon>
-    </None>
     <EmbeddedResource Include="Logic\LicenseForm.resx">
       <DependentUpon>LicenseForm.cs</DependentUpon>
     </EmbeddedResource>

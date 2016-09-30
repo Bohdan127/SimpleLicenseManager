@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using License.Logic;
 
 namespace LicenseTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            var licenseForm = new LicenseForm();
+            if (!licenseForm.CheckInstance("licenseKeySavedFromPreviousStarting"))
+                licenseForm.ShowDialog();
+            var id = LicenseForm.GetMotherBoardId();
         }
     }
 }
