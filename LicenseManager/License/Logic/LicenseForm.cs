@@ -2,13 +2,13 @@
 using License.DB;
 using License.DB.LicenseDBDataSetTableAdapters;
 using NLog;
-using Resources;
-using Resources.uk_UA;
 using System;
 using System.Linq;
 using System.Management;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using GlobalResources;
+using GlobalResources.uk_UA;
 using ToolsPortable;
 
 namespace License.Logic
