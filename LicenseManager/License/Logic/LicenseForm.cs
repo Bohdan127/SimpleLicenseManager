@@ -3,6 +3,7 @@ using License.DB;
 using License.DB.LicenseDBDataSetTableAdapters;
 using NLog;
 using Resources;
+using Resources.uk_UA;
 using System;
 using System.Linq;
 using System.Management;
@@ -28,6 +29,8 @@ namespace License.Logic
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.FixedSingle;
             _licenseTableAdapter.Fill(_licenseDbDataSet.License);
+            ResManager.RegisterResource("uk_UA",
+                uk_UA.ResourceManager);
         }
 
         public bool IsWrong { get; set; }
