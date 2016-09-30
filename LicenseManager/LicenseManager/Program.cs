@@ -3,7 +3,7 @@ using DevExpress.UserSkins;
 using System;
 using System.Windows.Forms;
 
-namespace  LicenseManager
+namespace LicenseManager
 {
     internal static class Program
     {
