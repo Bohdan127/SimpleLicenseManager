@@ -1,4 +1,4 @@
-﻿namespace  License.Logic
+﻿namespace License.Logic
 {
     partial class LicenseForm
     {
@@ -51,7 +51,6 @@
             this.applyButton.Name = "applyButton";
             this.applyButton.Size = new System.Drawing.Size(116, 35);
             this.applyButton.TabIndex = 1;
-            this.applyButton.Text = "Зарегистрировать";
             this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
             // 
             // LicenseForm
@@ -66,7 +65,6 @@
             this.MinimizeBox = false;
             this.Name = "LicenseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Пожалуйста впишите лицензионный ключ";
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
 

@@ -1,4 +1,6 @@
 ﻿using DevExpress.XtraEditors;
+using GlobalResources;
+using GlobalResources.uk_UA;
 using License.DB;
 using License.DB.LicenseDBDataSetTableAdapters;
 using NLog;
@@ -7,8 +9,6 @@ using System.Linq;
 using System.Management;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using GlobalResources;
-using GlobalResources.uk_UA;
 using ToolsPortable;
 
 namespace License.Logic
@@ -31,6 +31,9 @@ namespace License.Logic
             _licenseTableAdapter.Fill(_licenseDbDataSet.License);
             ResManager.RegisterResource("uk_UA",
                 uk_UA.ResourceManager);
+
+            applyButton.Text = ResManager.GetString(ResKeys.LicenseForm_RegButton);//"Зарегистрировать";
+            Text = ResManager.GetString(ResKeys.LicenseForm_Title); //"Пожалуйста впишите лицензионный ключ";
         }
 
         public bool IsWrong { get; set; }
@@ -87,12 +90,12 @@ namespace License.Logic
 
                 if (inst != null)
                 {
-                    if (string.IsNullOrWhiteSpace(inst.PcName))
+                    if ((inst["PcName"] as string).IsBlank())
                     {
                         inst.PcName = GetMotherBoardId();
                         _licenseTableAdapter.Update(inst);
                     }
-                    else if (inst.PcName != GetMotherBoardId())
+                    else if (inst["PcName"] as string != GetMotherBoardId())
                     {
                         bRes = false;
                         XtraMessageBox.Show(
