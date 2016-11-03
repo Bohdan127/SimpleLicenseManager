@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace  LicenseManager
+namespace LicenseManager
 {
     public partial class CustomersForm : DevExpress.XtraEditors.XtraForm
     {
@@ -17,6 +17,12 @@ namespace  LicenseManager
         private void CustomersForm_GotFocus(object sender, EventArgs e)
         {
             customersTableAdapter.Fill(visaLicensesDataSet.Customer);
+            gridView1.InitNewRow += GridView1_InitNewRow;
+        }
+
+        private void GridView1_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+        {
+
         }
 
         public bool ToClose { get; set; }

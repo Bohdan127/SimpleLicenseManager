@@ -1,6 +1,5 @@
 ﻿using DevExpress.XtraEditors;
 using GlobalResources;
-using GlobalResources.uk_UA;
 using License.DB;
 using License.DB.LicenseDBDataSetTableAdapters;
 using NLog;
@@ -24,16 +23,21 @@ namespace License.Logic
         private readonly LicenseDBDataSet _licenseDbDataSet =
             new LicenseDBDataSet();
 
-        public LicenseForm()
+        public LicenseForm(string systemName, System.Resources.ResourceManager resManager)
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.FixedSingle;
             _licenseTableAdapter.Fill(_licenseDbDataSet.License);
-            ResManager.RegisterResource("uk_UA",
-                uk_UA.ResourceManager);
+            ResManager.RegisterResource(systemName, resManager);
 
-            applyButton.Text = ResManager.GetString(ResKeys.LicenseForm_RegButton);//"Зарегистрировать";
+            applyButton.Text = ResManager.GetString(ResKeys.LicenseForm_RegButton); //"Зарегистрировать";
             Text = ResManager.GetString(ResKeys.LicenseForm_Title); //"Пожалуйста впишите лицензионный ключ";
+        }
+
+        public sealed override string Text
+        {
+            get { return base.Text; }
+            set { base.Text = value; }
         }
 
         public bool IsWrong { get; set; }
@@ -44,17 +48,8 @@ namespace License.Logic
 
         public bool CheckInstance(string guid)
         {
-            var bRes = false;
-
-            var isMatched = Regex.IsMatch(guid,
-                textEdit1.Properties.Mask.EditMask);
-
             textEdit1.EditValue = guid;
-
-            if (isMatched)
-                bRes = CheckIsRegistered();
-
-            return bRes;
+            return CheckIsRegistered();
         }
 
         protected bool CheckIsRegistered()
@@ -87,10 +82,17 @@ namespace License.Logic
                         _logger.Error(ex.StackTrace);
                     }
                 }
-
                 if (inst != null)
                 {
-                    if ((inst["PcName"] as string).IsBlank())
+                    if (!inst.Available)
+                    {
+                        XtraMessageBox.Show(
+                           ResManager.GetString(ResKeys.Key_NotActive),
+                           "Error",
+                           MessageBoxButtons.OK,
+                           MessageBoxIcon.Error);
+                    }
+                    else if ((inst["PcName"] as string).IsBlank())
                     {
                         inst.PcName = GetMotherBoardId();
                         _licenseTableAdapter.Update(inst);
