@@ -20,6 +20,10 @@ namespace LicenseManager
             System.EventArgs e)
         {
             licensesTableAdapter.Fill(visaLicensesDataSet.License);
+            customerTableAdapter.Fill(visaLicensesDataSet.Customer);
+            repositoryItemLookUpEditCustomerId.DisplayMember = visaLicensesDataSet.Customer.NameColumn.ColumnName;
+            repositoryItemLookUpEditCustomerId.ValueMember = visaLicensesDataSet.Customer.IDColumn.ColumnName;
+            repositoryItemLookUpEditCustomerId.DataSource = visaLicensesDataSet.Customer;
         }
 
         public bool ToClose { get; set; }

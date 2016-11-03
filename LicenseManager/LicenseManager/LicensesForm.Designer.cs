@@ -16,11 +16,19 @@ namespace LicenseManager
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            //please don't touch it
+            try
             {
-                components.Dispose();
+                if (disposing && (components != null))
+                {
+                    components.Dispose();
+                }
+                base.Dispose(disposing);
             }
-            base.Dispose(disposing);
+            catch
+            {
+                //ignore
+            }
         }
 
         #region Windows Form Designer generated code
@@ -40,11 +48,13 @@ namespace LicenseManager
             this.repositoryItemTextEditReadOnly = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.colPcName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCustomerID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.licensesTableAdapter = new License.DB.LicenseDBDataSetTableAdapters.LicenseTableAdapter();
             this.colAvailable = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colEstimationTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemToggleSwitchAvailable = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
+            this.colEstimationTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemDateEditEstimationTime = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
+            this.licensesTableAdapter = new License.DB.LicenseDBDataSetTableAdapters.LicenseTableAdapter();
+            customerTableAdapter = new CustomerTableAdapter();
+            this.repositoryItemLookUpEditCustomerId = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.licensesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.visaLicensesDataSet)).BeginInit();
@@ -53,6 +63,7 @@ namespace LicenseManager
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitchAvailable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditEstimationTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditEstimationTime.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditCustomerId)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl1
@@ -65,7 +76,8 @@ namespace LicenseManager
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemTextEditReadOnly,
             this.repositoryItemToggleSwitchAvailable,
-            this.repositoryItemDateEditEstimationTime});
+            this.repositoryItemDateEditEstimationTime,
+            this.repositoryItemLookUpEditCustomerId});
             this.gridControl1.Size = new System.Drawing.Size(674, 283);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -116,15 +128,11 @@ namespace LicenseManager
             // 
             // colCustomerID
             // 
-            this.colCustomerID.ColumnEdit = this.repositoryItemTextEditReadOnly;
+            this.colCustomerID.ColumnEdit = this.repositoryItemLookUpEditCustomerId;
             this.colCustomerID.FieldName = "CustomerID";
             this.colCustomerID.Name = "colCustomerID";
             this.colCustomerID.Visible = true;
             this.colCustomerID.VisibleIndex = 2;
-            // 
-            // licensesTableAdapter
-            // 
-            this.licensesTableAdapter.ClearBeforeFill = true;
             // 
             // colAvailable
             // 
@@ -134,6 +142,13 @@ namespace LicenseManager
             this.colAvailable.Visible = true;
             this.colAvailable.VisibleIndex = 3;
             // 
+            // repositoryItemToggleSwitchAvailable
+            // 
+            this.repositoryItemToggleSwitchAvailable.AutoHeight = false;
+            this.repositoryItemToggleSwitchAvailable.Name = "repositoryItemToggleSwitchAvailable";
+            this.repositoryItemToggleSwitchAvailable.OffText = "Off";
+            this.repositoryItemToggleSwitchAvailable.OnText = "On";
+            // 
             // colEstimationTime
             // 
             this.colEstimationTime.ColumnEdit = this.repositoryItemDateEditEstimationTime;
@@ -141,13 +156,6 @@ namespace LicenseManager
             this.colEstimationTime.Name = "colEstimationTime";
             this.colEstimationTime.Visible = true;
             this.colEstimationTime.VisibleIndex = 4;
-            // 
-            // repositoryItemToggleSwitchAvailable
-            // 
-            this.repositoryItemToggleSwitchAvailable.AutoHeight = false;
-            this.repositoryItemToggleSwitchAvailable.Name = "repositoryItemToggleSwitchAvailable";
-            this.repositoryItemToggleSwitchAvailable.OffText = "Off";
-            this.repositoryItemToggleSwitchAvailable.OnText = "On";
             // 
             // repositoryItemDateEditEstimationTime
             // 
@@ -157,6 +165,22 @@ namespace LicenseManager
             this.repositoryItemDateEditEstimationTime.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemDateEditEstimationTime.Name = "repositoryItemDateEditEstimationTime";
+            // 
+            // licensesTableAdapter
+            // 
+            this.licensesTableAdapter.ClearBeforeFill = true;
+            //
+            // customerTableAdapter
+            //
+            customerTableAdapter.ClearBeforeFill = true;
+            // 
+            // repositoryItemLookUpEditCustomerId
+            // 
+            this.repositoryItemLookUpEditCustomerId.AutoHeight = false;
+            this.repositoryItemLookUpEditCustomerId.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditCustomerId.Name = "repositoryItemLookUpEditCustomerId";
+            this.repositoryItemLookUpEditCustomerId.ReadOnly = true;
             // 
             // LicensesForm
             // 
@@ -174,6 +198,7 @@ namespace LicenseManager
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitchAvailable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditEstimationTime.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditEstimationTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditCustomerId)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -185,6 +210,7 @@ namespace LicenseManager
         private LicenseDBDataSet visaLicensesDataSet;
         private System.Windows.Forms.BindingSource licensesBindingSource;
         private LicenseTableAdapter licensesTableAdapter;
+        private CustomerTableAdapter customerTableAdapter;
         private DevExpress.XtraGrid.Columns.GridColumn colGuid;
         private DevExpress.XtraGrid.Columns.GridColumn colPcName;
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerID;
@@ -193,5 +219,6 @@ namespace LicenseManager
         private DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch repositoryItemToggleSwitchAvailable;
         private DevExpress.XtraGrid.Columns.GridColumn colEstimationTime;
         private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEditEstimationTime;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditCustomerId;
     }
 }
