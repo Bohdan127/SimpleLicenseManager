@@ -91,6 +91,7 @@ namespace License.Logic
                            "Error",
                            MessageBoxButtons.OK,
                            MessageBoxIcon.Error);
+                        bRes = false;
                     }
                     else if ((inst["PcName"] as string).IsBlank())
                     {
